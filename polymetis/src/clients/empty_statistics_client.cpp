@@ -23,6 +23,18 @@
 #include <fstream>
 #include <sstream>
 
+
+// 添加对grpc::StatusCode的fmt格式化支持
+#include <fmt/core.h>
+template <>
+struct fmt::formatter<grpc::StatusCode> : fmt::formatter<int> {
+  template <typename FormatContext>
+  auto format(const grpc::StatusCode& status, FormatContext& ctx) const -> decltype(ctx.out()) {
+    return fmt::formatter<int>::format(static_cast<int>(status), ctx);
+  }
+};
+
+
 using grpc::Channel;
 using grpc::ClientContext;
 using grpc::ClientReader;
