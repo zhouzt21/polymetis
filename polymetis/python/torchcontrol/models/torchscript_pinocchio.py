@@ -22,6 +22,23 @@ except OSError:
     print(
         f"Warning: Failed to load 'libtorchscript_pinocchio.so' from CONDA_PREFIX, loading from default build directory instead: '{lib_path}'"
     )
+    
+    # fix bug for lib loading
+    torchrot_path = os.path.abspath(
+        os.path.join(
+            PKG_ROOT_DIR,
+            "../../build/torch_isolation/libtorchrot.so",
+        )
+    )
+    pino_wrapper_path = os.path.abspath(
+        os.path.join(
+            PKG_ROOT_DIR,
+            "../../build/torch_isolation/pinocchio_isolation/libpinocchio_wrapper.so",
+        )
+    )
+    torch.classes.load_library(torchrot_path)
+    torch.classes.load_library(pino_wrapper_path)
+
     torch.classes.load_library(lib_path)
 
 
