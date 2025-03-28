@@ -5,6 +5,7 @@ import polymetis
 
 __version__ = "0.2.0" # fix bug
 
+
 try:
     # Conda installed: Get version of conda pkg (assigned $GIT_DESCRIBE_NUMBER during build)
     if "CONDA_PREFIX" in os.environ and os.environ["CONDA_PREFIX"] in polymetis.__file__:
